@@ -3,6 +3,9 @@ import services
 
 from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi.middleware.cors import CORSMiddleware
+
+
 from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
@@ -14,6 +17,14 @@ from schemas import User, UserCreate, UserLogin
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Разрешить доступ с любого домена
+    allow_credentials=True,
+    allow_methods=["*"],  # Разрешить любые методы (GET, POST, PUT, DELETE и т.д.)
+    allow_headers=["*"],  # Разрешить любые заголовки
+)
 
 
 @router.get(
