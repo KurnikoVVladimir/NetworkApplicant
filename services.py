@@ -31,6 +31,14 @@ async def get_user_by_id(
 async def create_user(
     session: AsyncSession, user_create: UserCreate
 ):
+    stmt = select(User).where(User.login==user_create.login)
+    result: Result = await session.execute(stmt)
+    user = result.scalars().one_or_none()
+    if user is not None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User с логином ({user_create.login}) уже существует",
+        )
     user = User(**user_create.model_dump())
     session.add(user)
     await session.commit()
@@ -52,3 +60,21 @@ async def get_all_users(session: AsyncSession) -> List[User]:
     result: Result = await session.execute(stmt)
     users = result.scalars().all()
     return list(users)
+
+
+
+async def login_user(
+    session: AsyncSession, user_login: UserLogin
+):
+    stmt = select(User).where(
+        (User.login == user_login.login) &
+        (User.password == user_login.password)
+    )
+    result: Result = await session.execute(stmt)
+    user = result.scalars().one_or_none()
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Не верный логин или пароль.",
+        )
+    return user

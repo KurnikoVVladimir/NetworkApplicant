@@ -29,7 +29,7 @@ async def get_user_by_id(
 
 
 @router.post(
-    path="/user/",
+    path="/user/register/",
     response_model=User,
     description="Создать юзера",
 )
@@ -64,6 +64,17 @@ async def delete_user(
 ):
     user = await services.get_user_by_id(session, user_id)
     return await services.delete_user(session, user)
+
+@router.post(
+    path="/users/login/",
+    response_model=User,
+    description="Вход в систему",
+)
+async def login_user(
+        user_login: UserLogin,
+        session: AsyncSession = Depends(db_manager.session_dependency)
+):
+    return await services.login_user(session,user_login)
 
 
 app.include_router(router)

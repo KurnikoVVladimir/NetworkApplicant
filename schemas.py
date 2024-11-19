@@ -20,6 +20,7 @@ class UserLogin(BaseModel):
     password: str
 
 
+
 class User(BaseModel):
     id: int
     login: str
