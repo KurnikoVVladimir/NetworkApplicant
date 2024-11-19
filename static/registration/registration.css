@@ -3,7 +3,8 @@
 }
 
 body {
-    font-family: 'Arial Black', serif;
+    font-family: 'Bahnschrift', serif;
+    font-size: larger;
     margin: 0;
     padding: 0;
     background: #E0F7FAFF;
@@ -11,18 +12,41 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    scroll-behavior: smooth;
 }
 
 .container {
+    position: fixed;
+    right: 100px;
     width: 400px;
+    height: 600px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
 }
+.info-block{
+    background: white;
+    height: 900px;
+    width: 1000px;
+    margin-right: 800px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+ul{
+    padding-top: 20px;
+}
+.text{
+}
+
+.in-container{
+    margin-top: 30px;
+}
 
 .logo img {
+    display: inline-block;
     width: 100px;
     margin-bottom: 20px;
 }
@@ -86,19 +110,24 @@ input[type="text"], input[type="password"] {
     background: #1A237E;
     color: white;
 }
-img{
-    transition: opacity 1s ease-in;
+
+.image-container {
+    max-width: 80%;
+    text-align: center;
 }
 
 .fade-in {
+    width: 100%;
     opacity: 0;
+    transition: opacity 2s ease-in-out;
 }
 
 button {
     width: 100%;
     padding: 10px;
     background: #1A237E;
-    font-family: 'Arial Black', serif;
+    font-family: 'Bahnschrift', serif;
+    font-size: 17px;
     color: white;
     border: none;
     border-radius: 4px;
