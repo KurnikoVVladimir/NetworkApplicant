@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+}
+
+body {
+    font-family: 'Arial Black', serif;
+    margin: 0;
+    padding: 0;
+    background: #E0F7FAFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.logo img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    margin-top: 20px;
+}
+
+h1 {
+    color: #1A237E;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    color: #757575;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #1A237E;
+    outline: none;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group label {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #E0E0E0;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #1A237E;
+    transition: background 0.3s ease;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background: #1A237E;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #1A237E;
+    font-family: 'Arial Black', serif;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #3F51B5;
+}
