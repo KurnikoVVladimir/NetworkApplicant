@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="registration.css">
 </head>
 <body>
 <div class="container">
     <div class="logo">
-        <img src="image/logo.png" alt="Логотип">
+        <img src="../image/logo.png" alt="Логотип" class="fade-in">
     </div>
     <div class="form-container">
         <h1>Регистрация</h1>
         <form action="#" method="post">
-            <label for="login">Логин:</label>
-            <input type="text" id="login" name="login" required>
+            <label for="login">
+                Логин:
+                <input type="text" id="login" name="login" required>
+            </label>
 
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="password">
+                Пароль:
+                <input type="password" id="password" name="password" required>
+            </label>
 
-            <label for="status">Статус:</label>
+            <p>Статус:</p>
             <div class="radio-group">
-                <input type="radio" id="student" name="status" value="student" required>
+                <input type="radio" id="student" name="status" value="student">
                 <label for="student">Абитуриент</label>
-                <input type="radio" id="mentor" name="status" value="mentor" required>
+                <input type="radio" id="mentor" name="status" value="mentor">
                 <label for="mentor">Наставник</label>
             </div>
 
@@ -32,5 +36,6 @@
         </form>
     </div>
 </div>
+<!--<script>scr = "registration.js"</script>-->
 </body>
 </html>
