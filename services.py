@@ -1,4 +1,5 @@
 from typing import List
+import hashlib
 
 from fastapi import HTTPException
 from sqlalchemy import select, Result
@@ -9,7 +10,15 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 
 from models import User
-from schemas import UserCreate, UserLogin
+from schemas import UserCreate, UserLogin, Token
+
+
+
+def hash_string(input_string):
+    sha256_hash = hashlib.sha256()
+    sha256_hash.update(input_string.encode('utf-8'))
+    return sha256_hash.hexdigest()
+
 
 
 
@@ -39,7 +48,8 @@ async def create_user(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"User с логином ({user_create.login}) уже существует",
         )
-    user = User(**user_create.model_dump())
+    login_hash = hash_string(user_create.login)
+    user = User(login = user_create.login,password = user_create.password,login_hash = login_hash)
     session.add(user)
     await session.commit()
     await session.refresh(user)
@@ -77,4 +87,20 @@ async def login_user(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Не верный логин или пароль.",
         )
-    return user
+    return Token(token=user.login_hash)
+
+
+async def auth(
+        token: Token,
+        session: AsyncSession,
+):
+    stmt = select(User).where(
+        (User.login_hash == login_hash)
+    )
+    result: Result = await session.execute(stmt)
+    user = result.scalars().one_or_none()
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Пользователь не аутентифицирован.",
+        )

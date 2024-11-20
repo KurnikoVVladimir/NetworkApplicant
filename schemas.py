@@ -4,15 +4,10 @@ from pydantic import BaseModel, ConfigDict
 from enum import Enum
 
 
-class RoleEnum(str, Enum):
-    student = 'Студент'
-    applicant = 'Абитуриент'
-
 
 class UserCreate(BaseModel):
     login: str
     password: str
-    role: RoleEnum
 
 
 class UserLogin(BaseModel):
@@ -24,5 +19,9 @@ class UserLogin(BaseModel):
 class User(BaseModel):
     id: int
     login: str
-    role: RoleEnum
+    model_config = ConfigDict(from_attributes=True)
+
+
+class Token(BaseModel):
+    token: str
     model_config = ConfigDict(from_attributes=True)

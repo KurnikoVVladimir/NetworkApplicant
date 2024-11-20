@@ -11,4 +11,4 @@ class User(Base):
 
     login: Mapped[str] = mapped_column()
     password: Mapped[str] = mapped_column()
-    role: Mapped[str] = mapped_column()
+    login_hash: Mapped[str] = mapped_column()

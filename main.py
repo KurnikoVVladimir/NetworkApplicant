@@ -13,7 +13,7 @@ from datetime import timedelta
 from database import db_manager
 from models import *
 from typing import List
-from schemas import User, UserCreate, UserLogin
+from schemas import User, UserCreate, UserLogin, Token
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
@@ -78,7 +78,7 @@ async def delete_user(
 
 @router.post(
     path="/users/login/",
-    response_model=User,
+    response_model=Token,
     description="Вход в систему",
 )
 async def login_user(
