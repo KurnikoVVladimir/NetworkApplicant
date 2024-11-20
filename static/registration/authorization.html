@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Авторизация</title>
     <link rel="stylesheet" href="registration.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
         <img src="../image/logo.png" alt="Логотип" class="fade-in" style="position: relative; left: 150px">
     </div>
     <div class="form-container">
-        <h1>Регистрация</h1>
-        <form id="registrationForm">
+        <h1>Авторизация</h1>
+        <form id="loginForm">
             <label for="login">
                 Логин:
                 <input type="text" id="login" name="login" required>
@@ -25,16 +25,10 @@
                 <input type="password" id="password" name="password" required>
             </label>
 
-            <p>Статус:</p>
-            <div class="radio-group">
-                <input type="radio" id="student" name="status" value="student">
-                <label for="student">Абитуриент</label>
-                <input type="radio" id="mentor" name="status" value="mentor">
-                <label for="mentor">Наставник</label>
-            </div>
-
-            <button type="submit">Зарегистрироваться</button>
-            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+            <button type="submit">Войти</button>
+            <div id="error-message" style="color: red; margin-top: 20px;"></div>
+            <text style="position: relative; top: 25px">У вас нет ещё аккаунта?</text>
+            <a style="position: relative; top: 45px" href="registration.html">Зарегистрироваться</a>
         </form>
     </div>
 </div>
@@ -73,6 +67,6 @@
         </ul>
     </div>
 </div>
-<script src="registration.js"></script>
+<script src="authorization.js"></script>
 </body>
 </html>

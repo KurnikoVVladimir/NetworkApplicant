@@ -4,23 +4,21 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const registrationForm = document.getElementById('registrationForm');
+    const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('error-message');
 
-    registrationForm.addEventListener('submit', function(event) {
+    loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const login = document.getElementById('login').value;
         const password = document.getElementById('password').value;
-        const status = document.querySelector('input[name="status"]:checked').value;
 
         const data = {
             login: login,
-            password: password,
-            role: status === 'student' ? 'Студент' : 'Абитуриент'
+            password: password
         };
 
-        fetch('http://26.244.144.230:8000/api/user/register/', {
+        fetch('http://26.244.144.230:8000/api/users/login/', {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
@@ -33,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.login) {
                 // Записываем логин в локальное хранилище
                 localStorage.setItem('userLogin', data.login);
-                console.log('Успешная регистрация:', data);
+                console.log('Успешная авторизация:', data);
                 // Перенаправляем пользователя на /home
                 window.location.href = '/home';
             } else {
@@ -42,9 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch((error) => {
-            console.error('Ошибка регистрации:', error);
+            console.error('Ошибка авторизации:', error);
             // Отображаем сообщение об ошибке
-            errorMessage.textContent = 'Произошла ошибка при регистрации';
+            errorMessage.textContent = 'Произошла ошибка при авторизации';
         });
     });
 });
