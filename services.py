@@ -11,8 +11,8 @@ from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
 
-from models import User
-from schemas import UserCreate, UserLogin, Token, User as UserSchema
+from models import User, Quizz  # Импортируйте модели SQLAlchemy
+from schemas import UserCreate, UserLogin, Token, User as UserSchema, Quiz, QuizCreate, QuizLogin, Answer
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/users/login/")
 
@@ -116,3 +116,38 @@ async def auth(
             detail=f"Пользователь не аутентифицирован.",
         )
     return user
+
+
+async def create_quiz(
+    session: AsyncSession, quiz_create: QuizCreate
+):
+    stmt = select(Quizz).where(Quizz.question == quiz_create.question)  # Используйте Quizz
+    result: Result = await session.execute(stmt)
+    quiz = result.scalars().one_or_none()
+    if quiz is not None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Вопрос ({quiz_create.question}) уже существует",
+        )
+    question_hash = hash_string(quiz_create.question)
+    quiz = Quizz(question=quiz_create.question, answer=quiz_create.answer, question_hash=question_hash)
+    session.add(quiz)
+    await session.commit()
+    await session.refresh(quiz)
+    return Quiz.model_validate(quiz)  # Возвращаем Pydantic модель
+
+async def login_quiz(
+    session: AsyncSession, quiz_login: QuizLogin
+):
+    stmt = select(Quizz).where(
+        (Quizz.question == quiz_login.question) &
+        (Quizz.answer == quiz_login.answer)
+    )
+    result: Result = await session.execute(stmt)
+    quiz = result.scalars().one_or_none()
+    if quiz is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Не верный ответ.",
+        )
+    return Answer(answer="Правильный ответ")

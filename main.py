@@ -1,21 +1,13 @@
-import uvicorn
+# main.py
 import services
-
-
-from fastapi.security import HTTPBearer
-from fastapi.params import Depends
-from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi.middleware.cors import CORSMiddleware
-
-
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Form
-from fastapi.security import OAuth2PasswordRequestForm
-from datetime import timedelta
-
-from database import db_manager
-from models import *
+from fastapi.security import HTTPBearer, OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from schemas import User, UserCreate, UserLogin, Token
+from database import db_manager
+from models import User, Quizz  # Импортируйте модели SQLAlchemy
+from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin  # Импортируйте QuizLogin
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
@@ -29,20 +21,24 @@ app.add_middleware(
     allow_headers=["*"],  # Разрешить любые заголовки
 )
 
+@app.on_event("startup")
+async def startup_event():
+    await db_manager.initialize_database()
+
 @router.get(
     path="/users/me/",
-    response_model=User,
+    response_model=UserSchema,  # Используйте схему Pydantic
     description="Текущий пользователь",
     dependencies=[Depends(http_bearer)]
 )
 async def current_user(
-        user: User = Depends(services.auth)
+        user: UserSchema = Depends(services.auth)
 ):
     return user
 
 @router.get(
     path="/users/{user_id}/",
-    response_model=User,
+    response_model=UserSchema,  # Используйте схему Pydantic
     description="Чел по айди",
 )
 async def get_user_by_id(
@@ -51,10 +47,9 @@ async def get_user_by_id(
 ):
     return await services.get_user_by_id(session=session, user_id=user_id)
 
-
 @router.post(
     path="/user/register/",
-    response_model=User,
+    response_model=UserSchema,  # Используйте схему Pydantic
     description="Создать юзера",
 )
 async def create_user(
@@ -65,10 +60,9 @@ async def create_user(
         session=session, user_create=user_create
     )
 
-
 @router.get(
     path="/users/",
-    response_model=List[User],
+    response_model=List[UserSchema],  # Используйте схему Pydantic
     description="Все User",
 )
 async def get_users(
@@ -76,10 +70,9 @@ async def get_users(
 ):
     return await services.get_all_users(session)
 
-
 @router.delete(
     path="/users/",
-    response_model=User,
+    response_model=UserSchema,  # Используйте схему Pydantic
     description='Vova user'
 )
 async def delete_user(
@@ -91,18 +84,43 @@ async def delete_user(
 
 @router.post(
     path="/users/login/",
-    response_model=Token,
+    response_model=Token,  # Используйте схему Pydantic
     description="Вход в систему",
 )
-
 async def login_user(
         username: str = Form(),
         password: str = Form(),
         session: AsyncSession = Depends(db_manager.session_dependency)
 ):
-    user_login = UserLogin(login=username,password=password)
-    return await services.login_user(session,user_login)
+    user_login = UserLogin(login=username, password=password)
+    return await services.login_user(session, user_login)
 
+@router.post(
+    path="/quiz/register/",
+    response_model=Quiz,  # Используйте Pydantic модель Quiz
+    description="Создать векторины",
+)
+async def create_quez(
+    quiz_create: QuizCreate,
+    session: AsyncSession = Depends(db_manager.session_dependency),
+):
+    return await services.create_quiz(
+        session=session, quiz_create=quiz_create
+    )
+
+
+@router.post(
+    path="/quiz/answer/",
+    response_model=Answer,  # Используйте схему Pydantic
+    description="Проверка ответа",
+)
+async def answer_quiz(
+    question: str = Form(),
+    answer: str = Form(),
+    session: AsyncSession = Depends(db_manager.session_dependency)
+):
+    quiz_question = QuizLogin(question=question, answer=answer)
+    return await services.login_quiz(session, quiz_question)  # Исправлено на правильную функцию
 
 
 app.include_router(router)
