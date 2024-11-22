@@ -1,12 +1,14 @@
 import uvicorn
 import services
 
+
+from fastapi.security import HTTPBearer
 from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.middleware.cors import CORSMiddleware
 
 
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Form
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 
@@ -17,6 +19,7 @@ from schemas import User, UserCreate, UserLogin, Token
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
+http_bearer = HTTPBearer(auto_error=False)
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,6 +29,16 @@ app.add_middleware(
     allow_headers=["*"],  # Разрешить любые заголовки
 )
 
+@router.get(
+    path="/users/me/",
+    response_model=User,
+    description="Текущий пользователь",
+    dependencies=[Depends(http_bearer)]
+)
+async def current_user(
+        user: User = Depends(services.auth)
+):
+    return user
 
 @router.get(
     path="/users/{user_id}/",
@@ -81,11 +94,15 @@ async def delete_user(
     response_model=Token,
     description="Вход в систему",
 )
+
 async def login_user(
-        user_login: UserLogin,
+        username: str = Form(),
+        password: str = Form(),
         session: AsyncSession = Depends(db_manager.session_dependency)
 ):
+    user_login = UserLogin(login=username,password=password)
     return await services.login_user(session,user_login)
+
 
 
 app.include_router(router)
