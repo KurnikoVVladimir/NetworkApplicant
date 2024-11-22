@@ -117,6 +117,19 @@ async def auth(
         )
     return user
 
+async def get_quiz_by_id(
+    session: AsyncSession, quiz_id: int
+):
+    stmt = select(Quizz).where(Quizz.id == quiz_id)
+    result: Result = await session.execute(stmt)
+    quiz = result.scalars().one_or_none()
+
+    if quiz is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Quiz с ID ({quiz_id}) не найден",
+        )
+    return quiz
 
 async def create_quiz(
     session: AsyncSession, quiz_create: QuizCreate
@@ -151,3 +164,17 @@ async def login_quiz(
             detail=f"Не верный ответ.",
         )
     return Answer(answer="Правильный ответ")
+
+async def get_all_quiz(session: AsyncSession) -> List[Quiz]:
+    stmt = select(Quizz)
+    result: Result = await session.execute(stmt)
+    quizes = result.scalars().all()
+    return [Quiz.model_validate(quiz) for quiz in quizes]
+
+
+async def delete_quiz(
+        session: AsyncSession, quiz: Quiz
+):
+    await session.delete(quiz)
+    await session.commit()
+    return quiz

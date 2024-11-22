@@ -122,5 +122,28 @@ async def answer_quiz(
     quiz_question = QuizLogin(question=question, answer=answer)
     return await services.login_quiz(session, quiz_question)  # Исправлено на правильную функцию
 
+@router.get(
+    path="/quizes/",
+    response_model=List[Quiz],  # Используйте схему Pydantic
+    description="Все Quiz",
+)
+async def get_quiz(
+        session: AsyncSession = Depends(db_manager.session_dependency)
+):
+    return await services.get_all_quiz(session)
+
+
+@router.delete(
+    path="/quizes",
+    response_model=Quiz,  # Используйте схему Pydantic
+    description='Удаление векторины'
+)
+async def delete_quiz(
+        quiz_id: int,
+        session: AsyncSession = Depends(db_manager.session_dependency)
+):
+    quiz = await services.get_quiz_by_id(session, quiz_id)
+    return await services.delete_quiz(session, quiz)
+
 
 app.include_router(router)
