@@ -3,7 +3,7 @@
 }
 
 body, html {
-    background: linear-gradient(180.00deg, rgba(255, 255, 255, 0.7), rgba(17, 222, 4, 0.7) 100%);
+    background: linear-gradient(180.00deg, rgba(255, 255, 255, 0.7), rgba(17, 222, 4, 0.7) 200%);
     font-family: 'Bahnschrift', serif;
     font-size: larger;
     position: absolute;
@@ -11,6 +11,7 @@ body, html {
     height: 100%;
     left: 0;
     top: 0;
+    scroll-behavior: smooth;
 }
 
 header {
@@ -47,7 +48,10 @@ button:hover {
 }
 
 .info-container {
+    position: absolute;
     width: 60%;
+    bottom: 100px;
+    height: 800px;
     margin: 20px;
     padding: 20px;
     background: rgba(158, 215, 178, 0.49);
@@ -65,24 +69,30 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(80, 82, 82, 0.76);
 }
 
 .modal-content {
     background-color: #fefefe;
     border-radius: 10px;
-    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 500px;
-    height: 100%;
-    max-width: 500px;
+    height: 700px;
     position: relative;
-    left: 400px;
-    bottom: 400px;
-    text-align: center;
+    left: 1300px;
+    top: 100px;
 }
-
+.modal-info{
+    width: 90%;
+    position: relative;
+    right: 20px;
+    top: 20px;
+    margin: 20px;
+    padding: 20px;
+    background: rgb(227, 227, 157);
+    border: none;
+    border-radius: 8px;
+}
 .close {
     color: #b90101;
     float: right;
@@ -121,4 +131,22 @@ form button {
 
 form button:hover {
     background-color: #45a049;
+}
+
+.game-menu button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgb(135, 223, 113);
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-family: 'Bahnschrift', serif;
+    font-size: larger;
+}
+
+.game-menu button:hover {
+    background: rgb(41, 150, 10);
 }
