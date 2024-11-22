@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registrationForm');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        // Здесь можно добавить логику для обработки данных формы
         alert('Форма отправлена!');
         modal.style.display = 'none';
 
