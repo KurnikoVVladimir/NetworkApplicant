@@ -1,36 +1,47 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//
-//     const userLogin = localStorage.getItem('userLogin');
-//     const userLoginElement = document.getElementById('user-login');
-//     const userRoleElement = document.getElementById('user-role');
-//
-//     if (userLogin) {
-//         userLoginElement.textContent = userLogin;
-//
-//         fetch('http://26.244.144.230:8000/api/user/me/', {
-//             method: 'GET',
-//             headers: {
-//                 'accept': 'application/json',
-//                 'Authorization': `Bearer ${userLogin}`
-//             }
-//         })
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.login && data.role) {
-//                     userRoleElement.textContent = data.role;
-//                 } else {
-//                     console.error('Ошибка получения данных пользователя:', data.detail);
-//                 }
-//             })
-//             .catch((error) => {
-//                 console.error('Ошибка получения данных пользователя:', error);
-//             });
-//     } else {
-//         console.error('Логин пользователя не найден в локальном хранилище');
-//     }
-// })
-// ;
-// Get button, modal, and overlay elements
+document.addEventListener("DOMContentLoaded", function () {
+    const registrationForm = document.getElementById('registrationForm');
+    const errorMessage = document.getElementById('error-message');
+
+    registrationForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const login = document.getElementById('login').value;
+        const password = document.getElementById('password').value;
+
+
+        const data = {
+            login: login,
+            password: password
+        };
+
+        fetch('http://26.244.144.230:8000/api/user/register/', {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.login) {
+                    // Записываем логин в локальное хранилище
+                    localStorage.setItem('userLogin', data.login);
+                    console.log('Успешная регистрация:', data);
+                    // Перенаправляем пользователя на /home
+                    window.location.href = '#';
+                } else {
+                    // Отображаем сообщение об ошибке
+                    errorMessage.textContent = data.detail;
+                }
+            })
+            .catch((error) => {
+                console.error('Ошибка регистрации:', error);
+                // Отображаем сообщение об ошибке
+                errorMessage.textContent = 'Произошла ошибка при регистрации';
+            });
+    });
+});
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
     const openModalBtn = document.getElementById('openModal');
@@ -53,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registrationForm');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        // Здесь можно добавить логику для обработки данных формы
         alert('Форма отправлена!');
         modal.style.display = 'none';
+
     });
 });
