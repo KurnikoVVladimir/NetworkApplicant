@@ -183,3 +183,27 @@ form button:hover {
 .game-menu button:hover {
     background: rgb(41, 150, 10);
 }
+.animated-text-container {
+    position: relative;
+    bottom: 650px;
+    left: 1100px; /* Учитываем позицию картинки Rectangle0 и padding */
+    width: 510px; /* Ширина картинки Rectangle0 минус padding */
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.animated-text {
+    font-size: 30px;
+    white-space: nowrap;
+    animation: slide-left 2s linear forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
