@@ -1,4 +1,3 @@
-# database.py
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
     async_sessionmaker,
@@ -23,7 +22,7 @@ class Base(DeclarativeBase):
 
 class DatabaseManager:
     def __init__(self):
-        url = f"sqlite+aiosqlite:///database.db"  # Исправлено на правильное имя базы данных
+        url = f"sqlite+aiosqlite:///database.db"
         self.engine = create_async_engine(url=url, echo=False)
         self.session_maker = async_sessionmaker(
             bind=self.engine,

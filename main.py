@@ -1,13 +1,16 @@
-# main.py
 import services
+
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Form
 from fastapi.security import HTTPBearer, OAuth2PasswordRequestForm
+
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from typing import List
 from database import db_manager
-from models import User, Quizz  # Импортируйте модели SQLAlchemy
-from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin  # Импортируйте QuizLogin
+
+from models import User, Quizz
+from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
@@ -15,10 +18,10 @@ http_bearer = HTTPBearer(auto_error=False)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Разрешить доступ с любого домена
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешить любые методы (GET, POST, PUT, DELETE и т.д.)
-    allow_headers=["*"],  # Разрешить любые заголовки
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.on_event("startup")
@@ -27,7 +30,7 @@ async def startup_event():
 
 @router.get(
     path="/users/me/",
-    response_model=UserSchema,  # Используйте схему Pydantic
+    response_model=UserSchema,
     description="Текущий пользователь",
     dependencies=[Depends(http_bearer)]
 )
@@ -38,7 +41,7 @@ async def current_user(
 
 @router.get(
     path="/users/{user_id}/",
-    response_model=UserSchema,  # Используйте схему Pydantic
+    response_model=UserSchema,
     description="Чел по айди",
 )
 async def get_user_by_id(
@@ -49,7 +52,7 @@ async def get_user_by_id(
 
 @router.post(
     path="/user/register/",
-    response_model=UserSchema,  # Используйте схему Pydantic
+    response_model=UserSchema,
     description="Создать юзера",
 )
 async def create_user(
@@ -62,7 +65,7 @@ async def create_user(
 
 @router.get(
     path="/users/",
-    response_model=List[UserSchema],  # Используйте схему Pydantic
+    response_model=List[UserSchema],
     description="Все User",
 )
 async def get_users(
@@ -72,7 +75,7 @@ async def get_users(
 
 @router.delete(
     path="/users/",
-    response_model=UserSchema,  # Используйте схему Pydantic
+    response_model=UserSchema,
     description='Vova user'
 )
 async def delete_user(
@@ -84,7 +87,7 @@ async def delete_user(
 
 @router.post(
     path="/users/login/",
-    response_model=Token,  # Используйте схему Pydantic
+    response_model=Token,
     description="Вход в систему",
 )
 async def login_user(
@@ -97,7 +100,7 @@ async def login_user(
 
 @router.post(
     path="/quiz/register/",
-    response_model=Quiz,  # Используйте Pydantic модель Quiz
+    response_model=Quiz,
     description="Создать векторины",
 )
 async def create_quez(
@@ -111,7 +114,7 @@ async def create_quez(
 
 @router.post(
     path="/quiz/answer/",
-    response_model=Answer,  # Используйте схему Pydantic
+    response_model=Answer,
     description="Проверка ответа",
 )
 async def answer_quiz(
@@ -124,7 +127,7 @@ async def answer_quiz(
 
 @router.get(
     path="/quizes/",
-    response_model=List[Quiz],  # Используйте схему Pydantic
+    response_model=List[Quiz],
     description="Все Quiz",
 )
 async def get_quiz(
@@ -135,7 +138,7 @@ async def get_quiz(
 
 @router.delete(
     path="/quizes",
-    response_model=Quiz,  # Используйте схему Pydantic
+    response_model=Quiz,
     description='Удаление векторины'
 )
 async def delete_quiz(

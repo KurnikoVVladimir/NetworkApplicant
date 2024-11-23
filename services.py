@@ -69,11 +69,11 @@ async def create_user(
 
 
 async def delete_user(
-     session: AsyncSession, user: User
+        session: AsyncSession, user: User
 ):
-     await session.delete(user)
-     await session.commit()
-     return user
+    await session.delete(user)
+    await session.commit()
+    return user
 
 
 async def get_all_users(session: AsyncSession) -> List[User]:
@@ -178,3 +178,4 @@ async def delete_quiz(
     await session.delete(quiz)
     await session.commit()
     return quiz
+

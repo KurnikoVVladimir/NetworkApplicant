@@ -13,7 +13,7 @@ class User(Base):
     login_hash: Mapped[str] = mapped_column()
 
 class Quizz(Base):
-    __tablename__ = "quizzes"  # Исправлено на правильное имя таблицы
+    __tablename__ = "quizzes"
 
     question: Mapped[str] = mapped_column()
     answer: Mapped[str] = mapped_column()
