@@ -9,8 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from database import db_manager
 
-from models import User, Quizz
-from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin
+from models import Quizz
+from schemas import QuizCreate, Quiz, Answer, QuizLogin
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
@@ -24,79 +24,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.on_event("startup")
-async def startup_event():
-    await db_manager.initialize_database()
-
-@router.get(
-    path="/users/me/",
-    response_model=UserSchema,
-    description="Текущий пользователь",
-    dependencies=[Depends(http_bearer)]
-)
-async def current_user(
-        user: UserSchema = Depends(services.auth)
-):
-    return user
-
-@router.get(
-    path="/users/{user_id}/",
-    response_model=UserSchema,
-    description="Чел по айди",
-)
-async def get_user_by_id(
-        user_id: int,
-        session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.get_user_by_id(session=session, user_id=user_id)
-
-@router.post(
-    path="/user/register/",
-    response_model=UserSchema,
-    description="Создать юзера",
-)
-async def create_user(
-        user_create: UserCreate,
-        session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.create_user(
-        session=session, user_create=user_create
-    )
-
-@router.get(
-    path="/users/",
-    response_model=List[UserSchema],
-    description="Все User",
-)
-async def get_users(
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    return await services.get_all_users(session)
-
-@router.delete(
-    path="/users/",
-    response_model=UserSchema,
-    description='Vova user'
-)
-async def delete_user(
-        user_id: int,
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    user = await services.get_user_by_id(session, user_id)
-    return await services.delete_user(session, user)
-
-@router.post(
-    path="/users/login/",
-    response_model=Token,
-    description="Вход в систему",
-)
-async def login_user(
-        username: str = Form(),
-        password: str = Form(),
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    user_login = UserLogin(login=username, password=password)
-    return await services.login_user(session, user_login)
 
 @router.post(
     path="/quiz/register/",
@@ -124,6 +51,7 @@ async def answer_quiz(
 ):
     quiz_question = QuizLogin(question=question, answer=answer)
     return await services.login_quiz(session, quiz_question)  # Исправлено на правильную функцию
+
 
 @router.get(
     path="/quizes/",
