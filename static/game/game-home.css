@@ -187,7 +187,7 @@ form button:hover {
     position: relative;
     bottom: 650px;
     left: 1100px; /* Учитываем позицию картинки Rectangle0 и padding */
-    width: 510px; /* Ширина картинки Rectangle0 минус padding */
+    width: 600px; /* Ширина картинки Rectangle0 минус padding */
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;

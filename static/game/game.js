@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <img src="../game/img/man_1.png" alt="" style="height: 700px; position: relative; top:100px; left: 500px">
             <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left:400px">
             <div class="animated-text-container">
-                <div class="animated-text">Привет, я процесс менеджер Паша. Это ты менеджер по найму?</div>
+                <div class="animated-text"><p>Привет, я процесс менеджер Паша.</p>
+                    <p>Это ты менеджер по найму?</p></div>
             </div>
         `;
 
@@ -67,13 +68,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 newGameMenu.className = 'game-menu';
                 newGameMenu.innerHTML = `
             <img src="../game/img/man_1.png" alt="" style="height: 700px; position: relative; top:100px; left: 500px">
-            <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left:400px">
+            <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left:450px">
             <div class="animated-text-container">
-                <div class="animated-text">Привет, я процесс менеджер Паша</div>
+                <div class="animated-text"><p>Отлично, ты должен помочь мне спасти </p>
+                 <p>мой бизнес, от меня уже отвернулись все инвесторы,</p>
+                  <p>я несу большой убыток...</p></div>
             </div>
         `;
                 document.body.appendChild(newGameMenu);
-                document.body.style.backgroundImage = 'url("../game/img/image6.png")';
+                document.body.style.backgroundImage = 'url("../game/img/img.png")';
                 document.body.style.position = 'absolute';
                 document.body.style.width = '100%';
                 document.body.style.height = '100%';
@@ -83,9 +86,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 newGameMenu.style.width = '100%';
                 newGameMenu.style.height = '800px';
                 newGameMenu.style.borderRadius = '8px';
-
-
             }
         });
     }
-});
+    const nextButton_1 = document.createElement('button');
+    nextButton_1.onclick = function () {
+        // Удаляем текущее меню игры
+        newGameMenu.style.display = 'none';
+        const newGameMenu = document.createElement('div');
+                newGameMenu.className = 'game-menu';
+                newGameMenu.innerHTML = `<img src="../game/img/man_1.png" alt="" style="height: 700px; position: relative; top:100px; left: 500px">
+            <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left:450px">
+            <div class="animated-text-container">
+                <div class="animated-text"><p>Отлично, ты должен помочь мне спасти </p>
+                 <p>мой бизнес, от меня уже отвернулись все инвесторы,</p>
+                  <p>я несу большой убыток...</p></div>
+             </div>
+        `;
+
