@@ -55,7 +55,7 @@ button:hover {
     left: 100px;
     bottom: 10px;
     height: 800px;
-    /*background: rgba(69, 160, 73, 0.27);*/
+    background: rgba(66, 66, 66, 0.27);
     /*background-image: url("../game/img/image5.png");*/
     width: 1728px;
     border: none;
@@ -73,7 +73,9 @@ button:hover {
     width: 1000px;
     text-align: center;
 }
-
+.card-container{
+    margin: 20px;
+}
 .modal {
     display: none;
     position: fixed;
@@ -196,7 +198,7 @@ form button:hover {
 .animated-text {
     font-size: 30px;
     white-space: nowrap;
-    animation: slide-left 2s linear forwards;
+    animation: slide-left 0.1s linear forwards;
 }
 
 @keyframes slide-left {
