@@ -15,7 +15,7 @@ body, html {
 }
 
 header {
-    padding: 10px 20px;
+    padding-top: 20px;
 }
 
 header nav a {
@@ -48,17 +48,21 @@ button:hover {
 }
 
 .info-container {
-    position: absolute;
-    width: 60%;
-    bottom: 100px;
+    bottom: 20px;
     height: 800px;
-    margin: 20px;
-    padding: 20px;
     background: rgba(158, 215, 178, 0.49);
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(44, 43, 43, 0.62);
-
+}
+.info-text{
+    position: relative;
+    left: 50px;
+    top: 100px;
+    font-size: xx-large;
+    color: #231c1c;
+    width: 800px;
+    text-align: center;
 }
 .modal {
     display: none;
@@ -131,6 +135,23 @@ form button {
 
 form button:hover {
     background-color: #45a049;
+}
+
+.game-menu {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    background: rgba(158, 215, 178, 0.49);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(44, 43, 43, 0.62);
+}
+
+.game-menu h2 {
+    text-align: center;
+    font-size: xx-large;
+    color: #231c1c;
+    margin-bottom: 20px;
 }
 
 .game-menu button {
