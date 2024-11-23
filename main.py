@@ -1,4 +1,3 @@
-# main.py
 import services
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Form
 from fastapi.security import HTTPBearer, OAuth2PasswordRequestForm
@@ -6,14 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from database import db_manager
-<<<<<<< HEAD
 
-from models import User, Quizz
-from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin, UserProgress as UserProgressSchema
-=======
-from models import User, Quizz  # Импортируйте модели SQLAlchemy
-from schemas import UserCreate, UserLogin, Token, User as UserSchema, QuizCreate, Quiz, Answer, QuizLogin  # Импортируйте QuizLogin
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
+
+from models import Quizz
+from schemas import  QuizCreate, Quiz, Answer, QuizLogin
+
+
 
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
@@ -31,99 +28,7 @@ app.add_middleware(
 async def startup_event():
     await db_manager.initialize_database()
 
-@router.get(
-    path="/users/me/",
-<<<<<<< HEAD
-    response_model=UserSchema,
-=======
-    response_model=UserSchema,  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description="Текущий пользователь",
-    dependencies=[Depends(http_bearer)]
-)
-async def current_user(
-        user: UserSchema = Depends(services.auth)
-):
-    return user
 
-@router.get(
-    path="/users/{user_id}/",
-<<<<<<< HEAD
-    response_model=UserSchema,
-=======
-    response_model=UserSchema,  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description="Чел по айди",
-)
-async def get_user_by_id(
-        user_id: int,
-        session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.get_user_by_id(session=session, user_id=user_id)
-
-@router.post(
-    path="/user/register/",
-<<<<<<< HEAD
-    response_model=UserSchema,
-=======
-    response_model=UserSchema,  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description="Создать юзера",
-)
-async def create_user(
-        user_create: UserCreate,
-        session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.create_user(
-        session=session, user_create=user_create
-    )
-
-@router.get(
-    path="/users/",
-<<<<<<< HEAD
-    response_model=List[UserSchema],
-=======
-    response_model=List[UserSchema],  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description="Все User",
-)
-async def get_users(
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    return await services.get_all_users(session)
-
-@router.delete(
-    path="/users/",
-<<<<<<< HEAD
-    response_model=UserSchema,
-=======
-    response_model=UserSchema,  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description='Vova user'
-)
-async def delete_user(
-        user_id: int,
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    user = await services.get_user_by_id(session, user_id)
-    return await services.delete_user(session, user)
-
-@router.post(
-    path="/users/login/",
-<<<<<<< HEAD
-    response_model=Token,
-=======
-    response_model=Token,  # Используйте схему Pydantic
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
-    description="Вход в систему",
-)
-async def login_user(
-        username: str = Form(),
-        password: str = Form(),
-        session: AsyncSession = Depends(db_manager.session_dependency)
-):
-    user_login = UserLogin(login=username, password=password)
-    return await services.login_user(session, user_login)
 
 @router.post(
     path="/quiz/register/",
@@ -151,7 +56,6 @@ async def answer_quiz(
     quiz_question = QuizLogin(question=question, answer=answer)
     return await services.login_quiz(session, quiz_question)  # Исправлено на правильную функцию
 
-<<<<<<< HEAD
 @router.get(
     path="/quizes/",
     response_model=List[Quiz],
@@ -174,30 +78,5 @@ async def delete_quiz(
     quiz = await services.get_quiz_by_id(session, quiz_id)
     return await services.delete_quiz(session, quiz)
 
-@router.post(
-    path="/progress/",
-    response_model=UserProgressSchema,
-    description="Сохранить прогресс пользователя",
-)
-async def save_progress(
-    user_id: int,
-    quiz_id: int,
-    session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.save_user_progress(session, user_id, quiz_id)
-
-@router.get(
-    path="/progress/{user_id}/{quiz_id}/",
-    response_model=UserProgressSchema,
-    description="Получить прогресс пользователя",
-)
-async def get_progress(
-    user_id: int,
-    quiz_id: int,
-    session: AsyncSession = Depends(db_manager.session_dependency),
-):
-    return await services.get_user_progress(session, user_id, quiz_id)
-=======
->>>>>>> 10015836f715cafc5ac3b06dbc89a305ac378bdd
 
 app.include_router(router)
