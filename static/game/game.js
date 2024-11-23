@@ -26,8 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Создаем и добавляем меню игры
         gameMenu.innerHTML = `
-            <img src="../game/img/man_1.png" alt="" style="height: 700px; position: relative; top:100px; left: 300px">
-            <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left: 100px">
+            <img src="../game/img/man_1.png" alt="" style="height: 700px; position: relative; top:100px; left: 500px">
+            <img src="../game/img/Rectangle0.png" alt="" style="height: 300px; position: relative; bottom:400px; left:400px">
+            <marquee behaniour="slade" direction="left" width="500px" scrollamount="6"
+             loop="10" onmouseover="this.stop(200);" onmouseout="this.start(100)"
+             style="height: 300px; font-size: 40px; position: relative; bottom:300px; right: 150px">
+             Привет, я процесс менеджер Паша</marquee>
         `;
 // /* image 5 */
 // position: absolute;
