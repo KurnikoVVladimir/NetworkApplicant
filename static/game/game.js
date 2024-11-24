@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 internetButton.onclick = function () {
                                                     sendAnswer('1', '2');
                                                     infoText.textContent = 'И это абсолютно верно, так как в наше время интернет прибрел огромные масштабы, и реклама в таких местах как различные соц сети или видео хостинги принесет Павлу намного больший прирост клиентов хоть и потребует средних затрат';
+
                                                     const buttonToSecondLvl = document.createElement('button');
                                                     buttonToSecondLvl.textContent = 'Далее';
                                                     buttonToSecondLvl.style.fontSize = '50px';
@@ -300,19 +301,99 @@ document.addEventListener('DOMContentLoaded', function () {
                                                         maksButton.onclick = function () {
                                                             sendAnswer('2', '1');
                                                             infoText.textContent = 'Не правильный выбор, есть более хороший кандидат';
-                                                }
+                                                        }
                                                         timaButton.onclick = function () {
                                                             sendAnswer('2', '2');
                                                             infoText.textContent = 'Не правильный выбор, есть более хороший кандидат';
-                                                }
+                                                        }
                                                         vovaButton.onclick = function () {
                                                             sendAnswer('2', '3');
                                                             infoText.textContent = 'Владимир хоть и требует самую большую зарплату,' +
                                                                 ' но является самым качественным в исполнении и не имеет черт мешающих его работе,' +
                                                                 ' из за чего он поможет достичь успеха компании Павла намного сильнее чем остальные кандидаты.';
-                                                }
+
+                                                            const buttonToThirdLvl = document.createElement('button');
+                                                            buttonToThirdLvl.textContent = 'Далее';
+                                                            buttonToThirdLvl.style.fontSize = '50px';
+                                                            buttonToThirdLvl.style.width = '400px';
+                                                            buttonToThirdLvl.style.position = 'relative';
+                                                            buttonToThirdLvl.style.top = '-120px';
+                                                            buttonToThirdLvl.style.left = '1335px';
+                                                            secondLevelMenu.appendChild(buttonToThirdLvl);
+
+                                                            buttonToThirdLvl.onclick = function () {
+                                                                // Удаляем текущее меню игры
+                                                                secondLevelMenu.style.display = 'none';
+
+                                                                const thirdLevelMenu = document.createElement('div');
+                                                                thirdLevelMenu.className = 'third-lvl-menu';
+                                                                thirdLevelMenu.innerHTML = `
+                                                        <div class="info-container" style="box-shadow: 0 4px 8px rgba(44, 43, 43, 0.62); background: rgba(61,61,61,0.65);">
+                                                            <div class="info-text" style="width: 900px; font-size: xx-large">
+                                                                В заключение поможем Павлу выбрать наилучшие место для расположения помещение,
+                                                                где будет находиться банк. Вам представлены 2 критерия каждого из места: "Стоимость
+                                                                помещения" и "Средняя проходимость" этих районов. Выберите наиболее подходящий 
+                                                                вариант для Павла.
+                                                                <div class="card-container">
+                                                                <div class = "info-text" style="font-size: 30px; width: 500px; height:261px; position: relative; top: 170px; left:-300px"> Проходимость: Минимальная
+                                                                                                                                                                                        Цена: 20 Т.Р. в месяц
+                                                                                                                                                                                        </div>
+                                                                <button id="mihalovkaButton" style="width: 400px; position: relative;bottom:-50px; left: -500px">Михайловка</button>
+                                                            </div>
+                                                            <div class="card-container">
+                                                                <div class = "info-text" style="font-size: 30px; width: 500px; height:261px; position: relative;top: -175px; left:300px"> Проходимость: Выше среднего
+                                                                                                                                                                                          Цена: 40 Т.Р. в месяц 
+                                                                                                                                                                                          </div>   
+                                                                <button id="grechesButton" style="width: 400px; position: relative;bottom:305px; right:-110px">ул. Греческая</button>
+                                                            </div>
+                                                            <div class="card-container">
+                                                                <div class = "info-text" style="font-size: 30px; width: 500px; height:261px; position: relative; top: -520px; left:850px"> Проходимость: Максимальная
+                                                                                                                                                                                            Цена: 70 Т.P. в месяц
+                                                                                                                                                                                            </div> 
+                                                                <button id="petrovskaButton" style="width: 400px; position: relative; bottom:650px; right:-650px">ул. Петровская</button>
+                                                            </div>
+                                                        </div>
+                                                                
+                                                `;
+                                                                document.body.appendChild(thirdLevelMenu);
+                                                                document.body.style.backgroundImage = 'url("../game/img/img_8.png")';
+                                                                document.body.style.position = 'absolute';
+                                                                document.body.style.width = '100%';
+                                                                document.body.style.height = '100%';
+
+                                                                // Стилизуем новое меню игры, чтобы оно соответствовало стилю gameMenu
+                                                                thirdLevelMenu.style.position = 'relative';
+                                                                thirdLevelMenu.style.width = '100%';
+                                                                thirdLevelMenu.style.height = '800px';
+                                                                thirdLevelMenu.style.borderRadius = '8px';
+
+                                                                const mihalovkaButton = thirdLevelMenu.querySelector('#mihalovkaButton');
+                                                                const grechesButton = thirdLevelMenu.querySelector('#grechesButton');
+                                                                const petrovskaButton = thirdLevelMenu.querySelector('#petrovskaButton');
+                                                                const infoText = thirdLevelMenu.querySelector('.info-text');
+
+                                                                mihalovkaButton.onclick = function () {
+                                                                    sendAnswer('3', '1');
+                                                                    infoText.textContent = 'Это помещение хоть и дешевое но находиться в районе с минимальной проходимостью,из за чего его аренда не самая выгодная.';
+                                                                }
+                                                                grechesButton.onclick = function () {
+                                                                    sendAnswer('3', '2');
+                                                                    infoText.textContent = 'Абсолютно верно, этот вариант ответа является самым оптимизированным для Павла,' +
+                                                                        ' поздравляю, теперь вы понимаете в финансовой грамотности немного больше чем раньше,' +
+                                                                        ' спасибо за участие в игре, удачи!!';
+                                                                }
+                                                                petrovskaButton.onclick = function () {
+                                                                    sendAnswer('3', '3');
+                                                                    infoText.textContent = 'Данное место обладает отличной проходимостью, но стоимость этого места слишком велика';
+
+                                                                }
+                                                            }
+                                                        }
+
+
                                                     }
                                                 }
+
 
                                             }
                                         }
