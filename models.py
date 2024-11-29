@@ -1,5 +1,5 @@
 # models.py
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 from typing import List

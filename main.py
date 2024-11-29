@@ -1,13 +1,15 @@
 import services
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, Form
-from fastapi.security import HTTPBearer, OAuth2PasswordRequestForm
+
+from fastapi import FastAPI, APIRouter, Depends, Form, Request
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import HTMLResponse
+from fastapi.security import HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from database import db_manager
+from fastapi.templating import Jinja2Templates
 
-
-from models import Quizz
 from schemas import  QuizCreate, Quiz, Answer, QuizLogin
 
 
@@ -15,6 +17,8 @@ from schemas import  QuizCreate, Quiz, Answer, QuizLogin
 app = FastAPI(title='Keber_PES')
 router = APIRouter(prefix='/api')
 http_bearer = HTTPBearer(auto_error=False)
+templates = Jinja2Templates(directory="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -67,7 +71,7 @@ async def get_quiz(
     return await services.get_all_quiz(session)
 
 @router.delete(
-    path="/quizes",
+    path="/quizes/",
     response_model=Quiz,
     description='Удаление векторины'
 )
@@ -77,6 +81,20 @@ async def delete_quiz(
 ):
     quiz = await services.get_quiz_by_id(session, quiz_id)
     return await services.delete_quiz(session, quiz)
+
+
+@app.get("/", response_class=HTMLResponse)
+async def front(request: Request):
+    return templates.TemplateResponse(
+        "home.html", {"request": request}
+    )
+
+
+@app.get("/game/", response_class=HTMLResponse)
+async def front(request: Request):
+    return templates.TemplateResponse(
+        "game-home.html", {"request": request}
+    )
 
 
 app.include_router(router)

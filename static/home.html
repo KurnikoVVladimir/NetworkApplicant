@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Банк Центр-Инвест</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+<header>
+    <img src="/static/image/lol.png" alt="" style="position: absolute;width: 340px;height: 71px;left: 63px;top: 20px;">
+    <nav>
+        <a href="#">Партнёры</a>
+        <a href="#">О нас</a>
+        <button id="openModal" style="position: relative; left: 1300px; top: 20px">Регистрация</button>
+    </nav>
+</header>
+<div class="main">
+    <img src="/static/image/img.png" alt="" style="position: absolute; width: 1294px; height: 708px; left: 340px; top: 267px">
+    <p>Финансовая грамотность — это способность понимать и эффективно управлять своими финансами. Она играет ключевую
+        роль в жизни каждого человека и общества в целом</p>
+    <img src="/static/image/img_1.png" alt="" style="position: absolute;width: 640px;height: 640px;left: 1000px;top: 253px;">
+    <img src="/static/image/img_5.png" alt="" style="position: absolute;width: 256px;height: 256px;left: 1600px; top: 356px;">
+</div>
+<img src="/static/image/img_5.png" alt="" style="position: absolute;width: 256px;height: 256px;left: 100px; top: 1050px;">
+<img src="/static/image/img_6.png" alt="" style="position: absolute;width: 256px;height: 256px;left: 1550px; top: 950px;">
+<div class="main">
+    <img src="/static/image/img_2.png" alt="" style="position: absolute;width: 100%;height: 800px;top: 1200px;">
+    <text>Мы рады представить вам уникальную обучающую
+        игру, созданную специально для нашего банка. Наша игра — это
+        увлекательный и интерактивный способ освоить основы финансовой грамотности, который поможет вам принимать более
+        осознанные финансовые решения в повседневной жизни.
+    </text>
+    <img src="/static/image/img_3.png" alt="" style="position: absolute;width: 726px;height: 726px;left: 40px;top: 1200px;">
+    <a href="/game/">
+        <button id="#game" style="position: relative; left: 1150px; top: 1700px">Играть
+        </button>
+    </a>
+    <img src="/static/image/img_5.png" alt="" style="position: absolute;width: 256px;height: 256px;left: 100px; top: 2500px;">
+</div>
+<div class="main">
+    <img src="/static/image/img.png" alt="" style="position: absolute; width: 1294px; height: 708px; left: 340px; top: 2300px">
+    <text style="position: absolute;width: 623px;height: 433px;left: 400px;top: 2450px;">Вы всегда можете пользоваться нашим сайтом и
+        проходить захватывающие игры на своём мобильном устройстве.
+    </text>
+    <img src="/static/image/img_4.png" alt="" style="position: relative;width: 500px;left: 1000px;top: 2200px;">
+</div>
+<div id="scroll-top">
+    <button type="button"><span data-hover="Наверх" style="position: relative; bottom: 30px"></span>
+    </button>
+</div>
+
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="registrationForm" style="position: relative; top: 100px; right: 10px">
+            <label for="login">
+                Логин:
+                <input type="text" id="login" name="login" required>
+            </label>
+
+            <label for="password">
+                Пароль:
+                <input type="password" id="password" name="password" required>
+            </label>
+
+            <button type="submit">Зарегистрироваться</button>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+
+        </form>
+    </div>
+</div>
+
+<script src="/static/home.js"></script>
+</body>
+</html>

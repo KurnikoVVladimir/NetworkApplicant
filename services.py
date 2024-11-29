@@ -1,15 +1,11 @@
 from typing import List
 import hashlib
 
-from database import db_manager
 from fastapi.security import OAuth2PasswordBearer
-from fastapi import HTTPException, Depends
+from fastapi import HTTPException
 from sqlalchemy import select, Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
-from passlib.context import CryptContext
-from jose import jwt, JWTError
-from datetime import datetime, timedelta
 
 from models import Quizz  # Импортируйте модели SQLAlchemy
 from schemas import Quiz, QuizCreate, QuizLogin, Answer
