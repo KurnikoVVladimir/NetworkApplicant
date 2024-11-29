@@ -12,7 +12,7 @@ body, html {
     left: 0;
     top: 0;
     scroll-behavior: smooth;
-    background-image: url("../game/img/image6.png")
+    background-image: url("/static/home.js/image6.png")
 }
 
 header {
@@ -56,7 +56,7 @@ button:hover {
     bottom: 10px;
     height: 800px;
     background: rgba(66, 66, 66, 0.27);
-    /*background-image: url("../game/img/image5.png");*/
+    /*background-image: url("/static/home.js/image5.png");*/
     width: 1728px;
     border: none;
     border-radius: 8px;
