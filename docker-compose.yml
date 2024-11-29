@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///database.db
+    volumes:
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  frontend:
+    build: ./static
+    ports:
+      - "8080:80"
+    volumes:
+      - ./static:/usr/share/nginx/html
