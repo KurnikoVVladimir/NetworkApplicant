@@ -188,8 +188,8 @@ form button:hover {
 .animated-text-container {
     position: relative;
     bottom: 650px;
-    left: 1100px; /* Учитываем позицию картинки Rectangle0 и padding */
-    width: 600px; /* Ширина картинки Rectangle0 минус padding */
+    left: 1100px;
+    width: 600px;
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;
@@ -198,7 +198,7 @@ form button:hover {
 .animated-text {
     font-size: 30px;
     white-space: nowrap;
-    animation: slide-left 0.1s linear forwards;
+    animation: slide-left 1s linear forwards;
 }
 
 @keyframes slide-left {

@@ -54,18 +54,19 @@
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="registrationForm" style="position: relative; top: 100px; right: 10px">
+        <h1>Регистрация</h1>
+        <img src="../static/image/vecteezy_3d-male-character-sitting-on-a-sofa-and-working-on-a-laptop_24658888.png" alt="" style="width: 300px; height: 300px; position: relative; top: 10px; right: 200px">
+        <form id="registrationForm" style="position: relative; bottom: 250px; left: 170px">
             <label for="login">
-                Логин:
-                <input type="text" id="login" name="login" required>
+                <input type="text" id="login" style="width: 300px; height: 30px; " name="login" placeholder="Логин" required>
             </label>
 
             <label for="password">
-                Пароль:
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" style="width: 300px; height: 30px" name="password" placeholder="Пароль" required>
             </label>
 
-            <button type="submit">Зарегистрироваться</button>
+            <button type="submit" style="width: 300px; position: relative; bottom: -10px">Зарегистрироваться</button>
+            <a href="#" style="text-align: center;position: relative; bottom: -70px"><p>У вас ещё нет аккаунта?</p></a>
             <div id="error-message" style="color: red; margin-top: 10px;"></div>
 
         </form>

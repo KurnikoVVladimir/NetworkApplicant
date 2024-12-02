@@ -110,17 +110,16 @@ section {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #dcf3df;
     border-radius: 10px;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 500px;
-    height: 500px;
-    max-width: 500px;
+    width: 700px;
+    height: 400px;
     position: fixed;
-    left: 700px;
-    bottom: -100px;
+    left: 650px;
+    bottom: -10px;
     text-align: center;
 }
 

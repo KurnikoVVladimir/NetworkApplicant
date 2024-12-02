@@ -184,11 +184,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                             какой метод лучшее всего подойдет для Павла, если его бюджет на рекламу составляет 40 - 80 тысяч рублей?
                                         </div>
                                         <div class="card-container">
-                                            <img src="/static/image/img/radio.PNG" alt="" style="width: 500px; height:261px; position: relative; top: 70px; left:50px">
+                                            <img src="/static/image/radio.PNG" alt="" style="width: 500px; height:261px; position: relative; top: 70px; left:50px">
                                             <button id="radioButton" style="width: 400px; position: relative;bottom:-150px; left:-410px">Радио</button>
                                         </div>
                                         <div class="card-container">
-                                            <img src="/static/image/img/Inet.PNG" alt="" style="width: 500px; height:261px; position: relative;bottom: 229px; left:600px">
+                                            <img src="/static/image/Inet.PNG" alt="" style="width: 500px; height:261px; position: relative;bottom: 229px; left:600px">
                                             <button id="internetButton" style="width: 400px; position: relative;bottom:150px; right:-140px">Интернет</button>
                                         </div>
                                         <div class="card-container">
