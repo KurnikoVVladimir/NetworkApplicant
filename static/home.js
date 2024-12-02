@@ -36,37 +36,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 password: password
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Если регистрация успешна, скрываем модальное окно и обновляем интерфейс
-                modal.style.display = 'none';
-                openModalBtn.style.display = 'none';
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    modal.style.display = 'none';
+                    openModalBtn.style.display = 'none';
 
-                const logoutButton = document.createElement('button');
-                logoutButton.textContent = 'Выйти';
-                logoutButton.id = 'logoutButton';
-                logoutButton.style.position = 'relative';
-                logoutButton.style.left = '1300px';
-                logoutButton.style.top = '20px';
+                    const logoutButton = document.createElement('button');
+                    logoutButton.textContent = 'Выйти';
+                    logoutButton.id = 'logoutButton';
+                    logoutButton.style.position = 'relative';
+                    logoutButton.style.left = '1300px';
+                    logoutButton.style.top = '20px';
 
-                logoutButton.onclick = function () {
-                    // Обработка выхода пользователя
-                    alert('Выход выполнен!');
-                    openModalBtn.style.display = 'block';
-                    logoutButton.remove();
+                    logoutButton.onclick = function () {
+                        // Обработка выхода пользователя
+                        alert('Выход выполнен!');
+                        openModalBtn.style.display = 'block';
+                        logoutButton.remove();
+                    }
+
+                    document.querySelector('header nav').appendChild(logoutButton);
+                } else {
+                    // Если регистрация не удалась, показываем сообщение об ошибке
+                    errorMessage.textContent = data.message || 'Ошибка регистрации';
                 }
-
-                document.querySelector('header nav').appendChild(logoutButton);
-            } else {
-                // Если регистрация не удалась, показываем сообщение об ошибке
-                errorMessage.textContent = data.message || 'Ошибка регистрации';
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            errorMessage.textContent = 'Произошла ошибка при регистрации';
-        });
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                errorMessage.textContent = 'Произошла ошибка при регистрации';
+            });
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
