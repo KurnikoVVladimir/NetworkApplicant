@@ -164,61 +164,67 @@ form button:hover {
 }
 
 #scroll-top {
-  position: fixed;
-  bottom: 48px;
-  right: 48px;
+    position: fixed;
+    bottom: 48px;
+    right: 48px;
+
 }
 
 #scroll-top button {
-  position: relative;
-  overflow: hidden;
-  height: 48px;
-  width: 48px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 16px;
-  background: #21c984;
-  transition: width 0.5s;
-  border-radius: 100px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    position: relative;
+    overflow: hidden;
+    height: 48px;
+    width: 48px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    background: #21c984;
+    transition: width 0.5s;
+    border-radius: 100px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 #scroll-top button span {
-  display: inline-block;
-  transition: opacity 0.3s ease 0s, transform 0.5s ease 0s;
-  line-height: 48px;
-  font-size: 20px;
-  width: 100%;
+    display: inline-block;
+    transition: opacity 0.3s ease 0s, transform 0.5s ease 0s;
+    line-height: 48px;
+    font-size: 20px;
+    width: 100%;
 }
 
 #scroll-top button span::before {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 200%;
-  opacity: 0;
-  content: attr(data-hover);
-  transform: translate3d(0, 0, 0);
-  color: #fff;
-  font-size: 16px;
-  text-transform: uppercase;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 200%;
+    opacity: 0;
+    content: attr(data-hover);
+    transform: translate3d(0, 0, 0);
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
 #scroll-top:hover button {
-  width: 120px;
-  background: #9b59b6;
+    width: 120px;
+    background: #9b59b6;
 }
 
 #scroll-top:hover button span {
-  transform: translateY(-200%);
+    transform: translateY(-200%);
 }
 
 #scroll-top:hover button span:before {
-  opacity: 1;
+    opacity: 1;
 }
 
 #scroll-top button:active {
-  background: #21c984;
+    background: #21c984;
+
+}
+
+@media screen and (max-width: 980px) {
+
 }

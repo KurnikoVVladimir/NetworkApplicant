@@ -69,6 +69,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
+    const scrollTopButton = document.querySelector('#scroll-top button');
+
+    scrollTopButton.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
     const openModalBtn = document.getElementById('openModal');
     const closeModalBtn = document.querySelector('.close');
